@@ -20,6 +20,9 @@ jobs:
           java-version: '17' # Change to '21' if your mod is for Minecraft 1.20.5+
           distribution: 'temurin'
 
+      - name: Fix gradlew line endings for Linux
+        run: sed -i -e 's/\r$//' gradlew
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
@@ -30,4 +33,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: minecraft-mod-jar
-          path: build/libs/*-all.jar # Or just build/libs/*.jar depending on your output
+          path: build/libs/*.jar
